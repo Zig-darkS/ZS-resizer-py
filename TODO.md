@@ -1,0 +1,3 @@
+- [ ] Fill the [README.md](README.md)
+- [ ] Fill the [AGENTS.md](AGENTS.md)
+- [ ] Fill the [LICENSE](LICENSE) if it's doesn't supposed to be MIT

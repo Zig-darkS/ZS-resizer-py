@@ -1,0 +1,10 @@
+_repomix-output.xml
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+*.log
