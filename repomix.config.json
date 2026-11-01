@@ -24,7 +24,14 @@
       "**/node_modules/**",
       "**/bin/**",
       "**/obj/**",
-      "AGENTS.md"
+      "AGENTS.md",
+      "_run-repomix.bat",
+      "_open-PS-here.bat",
+      ".editorconfig",
+      ".gitignore",
+      ".gitattributes",
+      ".vscode/**",
+      "repomix.config.json"
     ]
   },
   "security": { "enableSecurityCheck": true },
