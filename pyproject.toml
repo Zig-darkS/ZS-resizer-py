@@ -1,0 +1,22 @@
+[project]
+name = "zs-resizer"
+version = "0.1.0"
+description = "Fast Lanczos image resizer powered by FFmpeg"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Zig-darkS" }]
+dependencies = []
+
+[project.scripts]
+zs-resizer = "zs_resizer.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zs_resizer"]
