@@ -125,6 +125,16 @@ def main(argv: list[str] | None = None) -> int:
         for src in files
     ]
 
+    seen_dst: dict[Path, Path] = {}
+    for job in jobs:
+        key = job.dst.resolve()
+        if key in seen_dst:
+            raise SystemExit(
+                f"output collision: {seen_dst[key]} and {job.src} both map to {key}\n"
+                f"hint: use --suffix or --output-dir to disambiguate"
+            )
+        seen_dst[key] = job.src
+
     results = run_batch(jobs, workers=args.jobs)
     ok = sum(1 for r in results if r.ok)
     for r in results:

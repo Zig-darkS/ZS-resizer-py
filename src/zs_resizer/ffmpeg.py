@@ -125,6 +125,8 @@ def build_command(
 ) -> list[str]:
     info = probe(ffmpeg_path)
     fmt = dst.suffix.lower().lstrip(".")
+    if not fmt:
+        raise FFmpegError(f"output path has no extension: {dst}")
 
     use_zscale = engine == "zscale" or (engine == "auto" and info.has_zscale)
     if use_zscale:
@@ -148,6 +150,20 @@ def build_command(
             f"pad={plan.out_width}:{plan.out_height}:{px}:{py}:color=black"
         )
 
+    if fmt == "avif":
+        cmd_extra = []
+        for enc in ("libsvtav1", "libaom-av1"):
+            if enc in info.encoders:
+                cmd_extra = ["-c:v", enc]
+                break
+        else:
+            raise FFmpegError(
+                "no AV1 encoder available (need libsvtav1 or libaom-av1); "
+                "rebuild FFmpeg or pick a different output format"
+            )
+    else:
+        cmd_extra = []
+
     cmd = [
         info.path,
         "-y" if overwrite else "-n",
@@ -160,5 +176,6 @@ def build_command(
     cmd += quality_args(fmt, quality)
     if strip_metadata:
         cmd += ["-map_metadata", "-1"]
+    cmd += cmd_extra
     cmd.append(str(dst))
     return cmd
