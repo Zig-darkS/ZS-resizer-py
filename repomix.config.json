@@ -30,8 +30,7 @@
       ".editorconfig",
       ".gitignore",
       ".gitattributes",
-      ".vscode/**",
-      "repomix.config.json"
+      ".vscode/**"
     ]
   },
   "security": { "enableSecurityCheck": true },
